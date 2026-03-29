@@ -13,6 +13,7 @@ int main(void) {
     }
     printed_secret[length] = '\0';
     size_t correct_guesses = 0;
+    size_t temp_guess_tracker = 0;
     const size_t BUFFER_SIZE = 10;
     char buffer[BUFFER_SIZE];
     char guess = '0';
@@ -21,7 +22,7 @@ int main(void) {
         // Check condition.
         if (chances <= 0) {
             printf("You didn't make it!\n");
-            printf("The secret was \"%s\n\"", secret);
+            printf("The secret was \"%s\"!\n", secret);
             return 0;
         }
         // Printing.
@@ -36,6 +37,7 @@ int main(void) {
         guess = buffer[0];
         // check if guess in secret word.
         //printf("Your guess: %c\n", guess);
+        temp_guess_tracker = correct_guesses;
         for (size_t i = 0; i < length; i++) {
             if (guess == secret[i]) {
                 printed_secret[i] = secret[i];
@@ -46,6 +48,7 @@ int main(void) {
                 }
             }
         }
+        if (temp_guess_tracker == correct_guesses) chances--;
     }
     return 0;
 }
